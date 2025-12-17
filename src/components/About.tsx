@@ -6,12 +6,13 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { siteContent } from '@/data/content';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Timeline3D } from '@/components/Timeline3D';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export function About() {
     const containerRef = useRef<HTMLElement>(null);
-    const { title, paragraphs, technologiesLabel, technologies, stats } = siteContent.about;
+    const { title, paragraphs, technologiesLabel, technologies, stats, timeline } = siteContent.about;
 
     useGSAP(
         () => {
@@ -145,59 +146,11 @@ export function About() {
                             ))}
                         </div>
 
-                        {/* Decorative Visual */}
+                        {/* 3D Timeline */}
                         <div className="mt-12 relative">
-                            <Card className="bg-[#111115] border-0 p-8 gradient-border">
-                                <div className="relative aspect-square max-w-sm mx-auto">
-                                    {/* Animated circles */}
-                                    <motion.div
-                                        className="absolute inset-0 border-2 border-[#D2FF00]/20 rounded-full"
-                                        animate={{ rotate: 360 }}
-                                        transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-                                    />
-                                    <motion.div
-                                        className="absolute inset-4 border-2 border-[#00FFFF]/20 rounded-full"
-                                        animate={{ rotate: -360 }}
-                                        transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
-                                    />
-                                    <motion.div
-                                        className="absolute inset-8 border-2 border-[#FF00FF]/20 rounded-full"
-                                        animate={{ rotate: 360 }}
-                                        transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
-                                    />
-
-                                    {/* Center content */}
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                        <motion.div
-                                            className="text-6xl md:text-7xl font-bold chrome-text"
-                                            animate={{ scale: [1, 1.05, 1] }}
-                                            transition={{ duration: 2, repeat: Infinity }}
-                                        >
-                                            KR
-                                        </motion.div>
-                                    </div>
-
-                                    {/* Floating dots */}
-                                    {[...Array(6)].map((_, i) => (
-                                        <motion.div
-                                            key={i}
-                                            className="absolute w-2 h-2 bg-[#D2FF00] rounded-full"
-                                            style={{
-                                                top: `${20 + Math.random() * 60}%`,
-                                                left: `${20 + Math.random() * 60}%`,
-                                            }}
-                                            animate={{
-                                                y: [0, -10, 0],
-                                                opacity: [0.5, 1, 0.5],
-                                            }}
-                                            transition={{
-                                                duration: 2 + Math.random() * 2,
-                                                repeat: Infinity,
-                                                delay: Math.random() * 2,
-                                            }}
-                                        />
-                                    ))}
-                                </div>
+                            <h3 className="text-xl font-semibold mb-4 text-white">My Journey</h3>
+                            <Card className="bg-[#111115] border-0 p-4 gradient-border overflow-hidden">
+                                <Timeline3D items={timeline} />
                             </Card>
                         </div>
                     </div>

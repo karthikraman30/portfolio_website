@@ -44,6 +44,32 @@ export const siteContent = {
             { label: "Projects Completed", value: "25+" },
             { label: "Technologies Mastered", value: "15+" },
             { label: "Cups of Coffee", value: "∞" }
+        ],
+        timeline: [
+            {
+                id: 'school',
+                title: 'School',
+                institution: 'Your School Name',
+                period: '2015 - 2019',
+                description: 'Higher Secondary Education with focus on Science and Mathematics',
+                color: '#FF00FF'
+            },
+            {
+                id: 'college',
+                title: 'College',
+                institution: 'Your University Name',
+                period: '2019 - 2023',
+                description: 'B.Tech in Computer Science & Engineering',
+                color: '#00FFFF'
+            },
+            {
+                id: 'work',
+                title: 'Work',
+                institution: 'Your Company Name',
+                period: '2023 - Present',
+                description: 'Software Developer building innovative solutions',
+                color: '#D2FF00'
+            }
         ]
     },
 
