@@ -108,7 +108,7 @@ export function Hero() {
         <section
             id="hero"
             ref={containerRef}
-            className="relative min-h-screen flex items-center justify-center overflow-hidden"
+            className="relative min-h-screen flex items-center justify-center overflow-hidden border-0"
         >
             {/* Grid background */}
             <div className="absolute inset-0 grid-bg opacity-30" />
@@ -172,7 +172,7 @@ export function Hero() {
                         <Button
                             variant="outline"
                             size="lg"
-                            className="border-white/20 bg-white/5 text-white hover:bg-white/10 hover:border-[#D2FF00] font-semibold px-8 py-6 text-base"
+                            className="border-white/20 bg-white/5 text-white hover:bg-white/10 hover:border-[#D2FF00] hover:text-white font-semibold px-8 py-6 text-base"
                             onClick={() => scrollToSection(cta.secondary.scrollTo)}
                         >
                             {cta.secondary.text}

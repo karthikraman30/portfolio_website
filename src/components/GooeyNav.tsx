@@ -15,6 +15,7 @@ interface GooeyNavProps {
     timeVariance?: number;
     colors?: number[];
     initialActiveIndex?: number;
+    activeIndex?: number;  // New prop to sync with external scroll state
     onItemClick?: (href: string, index: number) => void;
 }
 
@@ -25,8 +26,9 @@ const GooeyNav = ({
     particleDistances = [90, 10],
     particleR = 100,
     timeVariance = 300,
-    colors = [1, 2, 3, 1, 2, 3, 1, 4],
+    colors = [1, 2, 3, 1, 4],
     initialActiveIndex = 0,
+    activeIndex: externalActiveIndex,
     onItemClick
 }: GooeyNavProps) => {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -34,6 +36,20 @@ const GooeyNav = ({
     const filterRef = useRef<HTMLSpanElement>(null);
     const textRef = useRef<HTMLSpanElement>(null);
     const [activeIndex, setActiveIndex] = useState(initialActiveIndex);
+
+    // Sync external activeIndex with internal state for scroll-based updates
+    useEffect(() => {
+        if (externalActiveIndex !== undefined && externalActiveIndex !== activeIndex) {
+            setActiveIndex(externalActiveIndex);
+            // Update effect position for the new active item
+            if (navRef.current) {
+                const activeLi = navRef.current.querySelectorAll('li')[externalActiveIndex];
+                if (activeLi) {
+                    updateEffectPosition(activeLi);
+                }
+            }
+        }
+    }, [externalActiveIndex]);
 
     const noise = (n = 1) => n / 2 - Math.random() * n;
 

@@ -1,23 +1,10 @@
 import { useRef } from 'react';
-import { motion } from 'framer-motion';
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import {
-    Code2,
-    Wrench,
-    Cpu,
-    Database,
-    Users,
-    Rocket,
-} from 'lucide-react';
+import { motion, useInView } from 'framer-motion';
+import { Code2, Wrench, Cpu, Database, Users, Rocket } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
-import { siteContent, type SkillCategory } from '@/data/content';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { siteContent } from '@/data/content';
 
-gsap.registerPlugin(ScrollTrigger);
-
+// Icon mapping
 const iconMap: Record<string, LucideIcon> = {
     Code2,
     Wrench,
@@ -28,159 +15,125 @@ const iconMap: Record<string, LucideIcon> = {
 };
 
 export function Skills() {
-    const containerRef = useRef<HTMLElement>(null);
-    const { title, subtitle, categories } = siteContent.skills;
+    const ref = useRef<HTMLElement>(null);
+    const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-    useGSAP(
-        () => {
-            // Animate title
-            gsap.from('.skills-title', {
-                scrollTrigger: {
-                    trigger: '.skills-title',
-                    start: 'top 80%',
-                    toggleActions: 'play none none reverse',
-                },
-                opacity: 0,
-                y: 50,
-                duration: 0.8,
-                ease: 'power3.out',
-            });
-
-            // Animate cards with stagger
-            gsap.from('.skill-card', {
-                scrollTrigger: {
-                    trigger: '.skills-grid',
-                    start: 'top 75%',
-                    toggleActions: 'play none none reverse',
-                },
-                opacity: 0,
-                y: 80,
-                scale: 0.9,
-                stagger: 0.12,
-                duration: 0.8,
-                ease: 'power3.out',
-            });
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1,
+                delayChildren: 0.2,
+            },
         },
-        { scope: containerRef }
-    );
+    };
+
+    const cardVariants = {
+        hidden: { opacity: 0, y: 30 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.5,
+                ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number],
+            },
+        },
+    };
 
     return (
         <section
+            ref={ref}
             id="skills"
-            ref={containerRef}
-            className="section relative overflow-hidden"
+            className="relative pt-12 pb-24 px-4 md:px-8 overflow-hidden scroll-mt-20"
         >
-            {/* Background gradients */}
-            <div className="absolute top-1/4 left-0 w-[400px] h-[400px] bg-[#FF00FF] rounded-full blur-[200px] opacity-5" />
-            <div className="absolute bottom-1/4 right-0 w-[400px] h-[400px] bg-[#D2FF00] rounded-full blur-[200px] opacity-5" />
-
-            <div className="max-w-7xl mx-auto">
-                {/* Header */}
-                <div className="text-center mb-16">
-                    <h2 className="skills-title section-title">{title}</h2>
-                    <p className="skills-title section-subtitle mx-auto mt-4">{subtitle}</p>
-                </div>
-
-                {/* Skills Grid */}
-                <div className="skills-grid grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {categories.map((category, i) => (
-                        <SkillCard key={i} category={category} index={i} />
-                    ))}
-                </div>
+            {/* Section Header */}
+            <div className="max-w-7xl mx-auto mb-16 text-center">
+                <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.5 }}
+                    className="text-cyan-400 font-mono text-sm tracking-widest uppercase mb-4"
+                >
+                    What I Bring to the Table
+                </motion.p>
+                <motion.h2
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                    className="section-title mb-4"
+                >
+                    {siteContent.skills.title}
+                </motion.h2>
+                <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    className="text-gray-400 text-lg max-w-2xl mx-auto"
+                >
+                    {siteContent.skills.subtitle}
+                </motion.p>
             </div>
+
+            {/* Skills Grid */}
+            <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                animate={isInView ? "visible" : "hidden"}
+                className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            >
+                {siteContent.skills.categories.map((category, index) => {
+                    const IconComponent = iconMap[category.iconName] || Code2;
+
+                    return (
+                        <motion.div
+                            key={index}
+                            variants={cardVariants}
+                            className="group relative"
+                        >
+                            {/* Card */}
+                            <div className="relative h-full p-6 rounded-2xl bg-gradient-to-br from-gray-900/80 to-gray-800/50 backdrop-blur-sm border border-gray-700/50 hover:border-cyan-500/50 transition-all duration-300 overflow-hidden">
+                                {/* Glow effect on hover */}
+                                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-cyan-500/10 via-transparent to-purple-500/10" />
+
+                                {/* Icon */}
+                                <div className={`relative z-10 w-12 h-12 rounded-xl bg-gradient-to-br ${category.iconBg} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                                    <IconComponent className="w-6 h-6 text-white" />
+                                </div>
+
+                                {/* Title */}
+                                <h3 className="relative z-10 text-xl font-semibold text-white mb-2 group-hover:text-cyan-300 transition-colors duration-300">
+                                    {category.title}
+                                </h3>
+
+                                {/* Description */}
+                                <p className="relative z-10 text-gray-400 text-sm mb-4 leading-relaxed">
+                                    {category.description}
+                                </p>
+
+                                {/* Skills Tags */}
+                                <div className="relative z-10 flex flex-wrap gap-2">
+                                    {category.items.map((item, itemIndex) => (
+                                        <span
+                                            key={itemIndex}
+                                            className="px-3 py-1.5 text-xs font-medium rounded-full bg-gray-800/80 text-gray-300 border border-gray-700/50 hover:border-cyan-500/50 hover:text-cyan-300 transition-all duration-200"
+                                        >
+                                            {item}
+                                        </span>
+                                    ))}
+                                </div>
+
+                                {/* Corner accent */}
+                                <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-cyan-500/10 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                            </div>
+                        </motion.div>
+                    );
+                })}
+            </motion.div>
+
+            {/* Decorative elements */}
+            <div className="absolute top-1/4 left-0 w-72 h-72 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl pointer-events-none" />
         </section>
     );
-}
-
-interface SkillCardProps {
-    category: SkillCategory;
-    index: number;
-}
-
-function SkillCard({ category, index }: SkillCardProps) {
-    const Icon = iconMap[category.iconName] || Code2;
-
-    // Different gradient for each card
-    const gradients = [
-        'from-cyan-400/20 to-blue-500/20',
-        'from-purple-500/20 to-indigo-500/20',
-        'from-pink-500/20 to-rose-500/20',
-        'from-amber-400/20 to-orange-500/20',
-        'from-emerald-400/20 to-teal-500/20',
-        'from-blue-400/20 to-cyan-500/20',
-    ];
-
-    const borderColors = [
-        'hover:border-cyan-400/50',
-        'hover:border-purple-500/50',
-        'hover:border-pink-500/50',
-        'hover:border-amber-400/50',
-        'hover:border-emerald-400/50',
-        'hover:border-blue-400/50',
-    ];
-
-    return (
-        <motion.div
-            className="skill-card"
-            whileHover={{
-                y: -8,
-                transition: { duration: 0.3 },
-            }}
-        >
-            <Card className={`bg-white/5 backdrop-blur-xl border-white/10 ${borderColors[index % 6]} transition-all duration-300 h-full relative overflow-hidden`}>
-                <CardHeader className="pb-2">
-                    {/* Icon */}
-                    <motion.div
-                        className={`w-14 h-14 rounded-xl bg-gradient-to-br ${gradients[index % 6]} flex items-center justify-center mb-2`}
-                        whileHover={{ rotate: 10, scale: 1.1 }}
-                    >
-                        <Icon
-                            className="w-7 h-7"
-                            style={{ color: getIconColor(index) }}
-                        />
-                    </motion.div>
-                    <CardTitle className="text-xl font-bold text-white">{category.title}</CardTitle>
-                    <CardDescription className="text-[#B4B4B4] line-clamp-2">
-                        {category.description}
-                    </CardDescription>
-                </CardHeader>
-                <CardContent>
-                    {/* Skills Tags */}
-                    <div className="flex flex-wrap gap-2">
-                        {category.items.map((item, i) => (
-                            <motion.div
-                                key={i}
-                                whileHover={{
-                                    scale: 1.05,
-                                }}
-                            >
-                                <Badge
-                                    variant="outline"
-                                    className="px-3 py-1 text-xs font-medium bg-white/5 text-[#B4B4B4] border-white/10 hover:bg-[#D2FF00]/10 hover:text-[#D2FF00] hover:border-[#D2FF00]/30 transition-colors"
-                                >
-                                    {item}
-                                </Badge>
-                            </motion.div>
-                        ))}
-                    </div>
-                </CardContent>
-
-                {/* Hover shine effect */}
-                <motion.div
-                    className="absolute inset-0 rounded-xl opacity-0 pointer-events-none"
-                    style={{
-                        background:
-                            'linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.1) 45%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.1) 55%, transparent 60%)',
-                    }}
-                    whileHover={{ opacity: 1, x: ['-100%', '100%'] }}
-                    transition={{ duration: 0.6 }}
-                />
-            </Card>
-        </motion.div>
-    );
-}
-
-function getIconColor(index: number): string {
-    const colors = ['#00FFFF', '#A855F7', '#EC4899', '#F59E0B', '#10B981', '#3B82F6'];
-    return colors[index % colors.length];
 }

@@ -12,27 +12,36 @@ import {
 } from '@/components/ui/sheet';
 import GooeyNav from '@/components/GooeyNav';
 
+
 export function Navigation() {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [activeSection, setActiveSection] = useState('hero');
-    const { links, logo } = siteContent.navigation;
+    const { links } = siteContent.navigation;
 
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 50);
 
-            // Update active section
+            // Update active section based on which section is most visible
             const sections = links.map((link) => link.href.slice(1));
-            const current = sections.find((section) => {
+            const windowHeight = window.innerHeight;
+            const threshold = windowHeight * 0.4; // 40% from top of viewport
+
+            let currentSection = sections[0];
+
+            for (const section of sections) {
                 const el = document.getElementById(section);
                 if (el) {
                     const rect = el.getBoundingClientRect();
-                    return rect.top <= 100 && rect.bottom >= 100;
+                    // If section top is above the threshold, it's the current section
+                    if (rect.top <= threshold) {
+                        currentSection = section;
+                    }
                 }
-                return false;
-            });
-            if (current) setActiveSection(current);
+            }
+
+            setActiveSection(currentSection);
         };
 
         window.addEventListener('scroll', handleScroll);
@@ -78,7 +87,7 @@ export function Navigation() {
                             scrollToSection('#hero');
                         }}
                     >
-                        {logo}
+                        KR
                     </motion.a>
 
                     {/* Desktop Links - GooeyNav */}
@@ -86,12 +95,13 @@ export function Navigation() {
                         <GooeyNav
                             items={links}
                             initialActiveIndex={getInitialActiveIndex()}
+                            activeIndex={getInitialActiveIndex()}
                             onItemClick={(href) => scrollToSection(href)}
                             animationTime={600}
                             particleCount={12}
                             particleDistances={[70, 10]}
                             particleR={80}
-                            colors={[1, 2, 3, 1, 2, 3, 1, 4]}
+                            colors={[1, 2, 3, 1, 4]}
                         />
                     </div>
 
@@ -115,7 +125,7 @@ export function Navigation() {
                 >
                     <SheetHeader>
                         <SheetTitle className="text-2xl font-bold text-[#D2FF00] neon-text">
-                            {logo}
+                            KR
                         </SheetTitle>
                     </SheetHeader>
                     <div className="flex flex-col items-start gap-6 mt-8">

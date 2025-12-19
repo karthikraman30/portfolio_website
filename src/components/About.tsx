@@ -1,18 +1,17 @@
 import { useRef } from 'react';
-import { motion } from 'framer-motion';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { siteContent } from '@/data/content';
-import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Timeline3D } from '@/components/Timeline3D';
+
+
+import { JourneyCards } from '@/components/JourneyCards';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export function About() {
     const containerRef = useRef<HTMLElement>(null);
-    const { title, paragraphs, technologiesLabel, technologies, stats, timeline } = siteContent.about;
+    const { title, paragraphs, timeline } = siteContent.about;
 
     useGSAP(
         () => {
@@ -78,7 +77,7 @@ export function About() {
         <section
             id="about"
             ref={containerRef}
-            className="section relative overflow-hidden"
+            className="section relative overflow-hidden min-h-0 pb-12 scroll-mt-20 border-0"
         >
             {/* Background gradient */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#00FFFF] rounded-full blur-[200px] opacity-5" />
@@ -87,71 +86,25 @@ export function About() {
                 {/* Title */}
                 <h2 className="about-title section-title mb-16">{title}</h2>
 
-                <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
+                <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-10 md:gap-12 lg:gap-16 xl:gap-20">
                     {/* Left Column - Bio */}
-                    <div className="about-content space-y-6">
+                    <div className="about-content space-y-8">
                         {paragraphs.map((paragraph, i) => (
                             <p
                                 key={i}
-                                className="about-paragraph text-lg text-[#B4B4B4] leading-relaxed"
-                            >
-                                {paragraph}
-                            </p>
+                                className="about-paragraph text-base md:text-lg text-[#B4B4B4]"
+                                style={{ lineHeight: '1.85' }}
+                                dangerouslySetInnerHTML={{ __html: paragraph }}
+                            />
                         ))}
-
-                        {/* Stats Grid */}
-                        <div className="about-stats grid grid-cols-2 gap-4 pt-8">
-                            {stats.map((stat, i) => (
-                                <motion.div
-                                    key={i}
-                                    className="about-stat"
-                                    whileHover={{ scale: 1.05, rotate: 1 }}
-                                >
-                                    <Card className="bg-white/5 border-white/10 backdrop-blur-xl">
-                                        <CardContent className="p-6 text-center">
-                                            <div className="text-3xl md:text-4xl font-bold text-[#D2FF00] mb-2">
-                                                {stat.value}
-                                            </div>
-                                            <div className="text-sm text-[#B4B4B4]">{stat.label}</div>
-                                        </CardContent>
-                                    </Card>
-                                </motion.div>
-                            ))}
-                        </div>
                     </div>
 
-                    {/* Right Column - Technologies */}
+                    {/* Right Column - Journey */}
                     <div>
-                        <h3 className="text-xl font-semibold mb-6 text-white">
-                            {technologiesLabel}
-                        </h3>
-
-                        <div className="tech-grid flex flex-wrap gap-3">
-                            {technologies.map((tech, i) => (
-                                <motion.div
-                                    key={i}
-                                    className="tech-badge"
-                                    whileHover={{
-                                        scale: 1.1,
-                                        boxShadow: '0 0 20px rgba(210, 255, 0, 0.3)',
-                                    }}
-                                >
-                                    <Badge
-                                        variant="outline"
-                                        className="px-4 py-2 text-sm font-medium text-[#D2FF00] border-[#D2FF00]/30 bg-transparent hover:bg-[#D2FF00]/10"
-                                    >
-                                        {tech}
-                                    </Badge>
-                                </motion.div>
-                            ))}
-                        </div>
-
-                        {/* 3D Timeline */}
-                        <div className="mt-12 relative">
-                            <h3 className="text-xl font-semibold mb-4 text-white">My Journey</h3>
-                            <Card className="bg-[#111115] border-0 p-4 gradient-border overflow-hidden">
-                                <Timeline3D items={timeline} />
-                            </Card>
+                        {/* Journey Cards */}
+                        <div className="mt-14 pt-10 relative border-t border-white/10">
+                            <h3 className="text-xl font-semibold text-white mb-8">My Journey</h3>
+                            <JourneyCards items={timeline} />
                         </div>
                     </div>
                 </div>

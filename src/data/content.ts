@@ -1,10 +1,15 @@
 // Content data for the portfolio website
 // This file contains all text content, making it easy to update and manage
 
+import coinciousImage from '@/assets/images/1.png';
+import snippetManagerImage from '@/assets/images/2.png';
+import housePriceImage from '@/assets/images/3.png';
+import speechToTextImage from '@/assets/images/4.png';
+
 export const siteContent = {
     // Hero Section
     hero: {
-        greeting: "Hey, I am",
+        greeting: "Hey! I am",
         name: "Karthik Raman",
         tagline: "I love building applications that solve real-world problems with modern technologies and creative solutions",
         subtitle: "Full-Stack Developer • AI Enthusiast • Problem Solver",
@@ -22,11 +27,12 @@ export const siteContent = {
 
     // About Section
     about: {
-        title: "About Me",
+        title: "LET ME INTRODUCE MYSELF",
         paragraphs: [
-            "Hello! I'm Karthik Raman, a passionate developer with a love for creating beautiful, functional, and user-centered digital experiences. With a strong foundation in modern web technologies, I bring ideas to life through clean, efficient code and thoughtful design.",
-            "My journey in software development has equipped me with a diverse set of skills, from front-end design to back-end development. I'm constantly learning and adapting to new technologies to stay at the forefront of web development.",
-            "When I'm not coding, you'll find me exploring new AI/ML concepts, contributing to open-source projects, or participating in competitive programming challenges. I believe in writing code that not only works but tells a story."
+            "Hello! I'm <span class='highlight-gradient'>Karthik Raman</span>, a <span class='highlight-cyan'>passionate developer</span> who loves transforming ideas into reliable, scalable products. Over time, I've explored several technologies and found my passion in building <span class='highlight-lime'>high-performance systems</span> and <span class='highlight-cyan'>intuitive user experiences</span>.",
+            "My journey in software development has equipped me with a diverse set of skills, from front-end design to back-end development. I'm constantly learning and adapting to new technologies to stay at the forefront of <span class='highlight-lime'>web development</span>.",
+            "My key areas of interest include developing <span class='highlight-cyan'>Web Applications</span>, exploring <span class='highlight-gradient'>AI/ML</span> concepts and applying to real problems and participating in <span class='highlight-lime'>competitive programming</span> challenges.",
+            "Whenever I am free, I love playing <span class='highlight-cyan'>badminton</span> and also love watching movies."
         ],
         technologiesLabel: "Technologies I work with:",
         technologies: [
@@ -49,25 +55,25 @@ export const siteContent = {
             {
                 id: 'school',
                 title: 'School',
-                institution: 'Your School Name',
-                period: '2015 - 2019',
+                institution: 'Asian International Private School',
+                period: '2014 - 2022',
                 description: 'Higher Secondary Education with focus on Science and Mathematics',
                 color: '#FF00FF'
             },
             {
                 id: 'college',
                 title: 'College',
-                institution: 'Your University Name',
-                period: '2019 - 2023',
+                institution: 'Dhirubhai Ambani University',
+                period: '2023 - 2027',
                 description: 'B.Tech in Computer Science & Engineering',
                 color: '#00FFFF'
             },
             {
                 id: 'work',
                 title: 'Work',
-                institution: 'Your Company Name',
-                period: '2023 - Present',
-                description: 'Software Developer building innovative solutions',
+                institution: 'Seeking opportunities to work and gain practical experience',
+                period: 'Open to Opportunities',
+                description: 'Looking for internships and entry-level positions',
                 color: '#D2FF00'
             }
         ]
@@ -125,63 +131,46 @@ export const siteContent = {
 
     // Projects Section
     projects: {
-        title: "Featured Projects",
-        subtitle: "A showcase of creative problem-solving and technical excellence",
+        title: "Explore My Projects",
+        subtitle: "Here are the projects I've worked on",
         items: [
             {
-                title: "AI-Powered Analytics Platform",
-                description: "Real-time data visualization and predictive analytics using machine learning algorithms. Features include interactive dashboards, automated reporting, and intelligent data insights.",
-                tech: ["Python", "TensorFlow", "React", "Node.js"],
-                image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop",
-                demoUrl: "",
-                githubUrl: "",
+                title: "Coincious : Smart Expense Tracker",
+                description: "Built a smart expense tracking application that uses Generative AI to automate transaction classification. Built with a robust Python/Flask backend and a responsive React/TypeScript frontend to simplify personal financial management.",
+                tech: ["Python", "Typescript", "CSS", "Javascript", "Supabase", "Gen AI"],
+                image: coinciousImage,
+                demoUrl: "https://coincious-smart-expense-tracker.vercel.app/",
+                githubUrl: "https://github.com/TirthGandhi18/Coincious-Smart-Expense-Tracker",
                 featured: true
             },
             {
-                title: "Distributed Task Scheduler",
-                description: "Scalable microservices architecture for managing millions of concurrent tasks. Built with fault tolerance, load balancing, and real-time monitoring capabilities.",
-                tech: ["C++", "Redis", "Docker", "Kubernetes"],
-                image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=400&fit=crop",
-                demoUrl: "",
-                githubUrl: "",
+                title: "Code Snippet Manager",
+                description: "A lightweight yet powerful CLI application built in C++ for organizing and managing reusable code snippets. Features intuitive CRUD operations, tag-based categorization for quick retrieval, and efficient search functionality—designed to streamline developer workflows and boost productivity.",
+                tech: ["C++"],
+                image: snippetManagerImage,
+                demoUrl: "https://docs.google.com/presentation/d/1e4CvpFofTbqnBp744SR7rpAdS11HIz04rExXeDkVcss/edit?usp=sharing",
+                githubUrl: "https://github.com/karthikraman30/code-snippet-manager",
                 featured: true
             },
             {
-                title: "Real-Time Collaboration Tool",
-                description: "WebSocket-based collaborative editing platform with conflict resolution. Supports multiple users, version history, and seamless synchronization.",
-                tech: ["JavaScript", "WebSocket", "React", "MongoDB"],
-                image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop",
+                title: "House Price Prediction Model",
+                description: "A web-based house price prediction system for California that uses XGBoost machine learning to provide accurate price estimates. Features interactive visualizations, feature importance analysis, location-based insights, and detailed prediction breakdowns. Built with Python, Streamlit, and Plotly for a seamless user experience.",
+                tech: ["Python", "Streamlit", "Plotly", "XGBoost", "NumPy", "Pandas", "Seaborn"],
+                image: housePriceImage,
                 demoUrl: "",
-                githubUrl: "",
+                githubUrl: "https://github.com/karthikraman30/california-house-price-prediction",
                 featured: false
             },
             {
-                title: "Neural Network Visualizer",
-                description: "Interactive 3D visualization of neural network architectures and training processes. Helps understand deep learning concepts through visual exploration.",
-                tech: ["Python", "Three.js", "PyTorch", "WebGL"],
-                image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600&h=400&fit=crop",
+                title: "Speech to Text with AI Response",
+                description: "Built a web app that converts speech to text using Whisper and generates AI responses with Ollama. Implemented real-time audio processing and user-friendly interface.",
+                tech: ["Whisper", "Ollama", "Speech Recognition", "AI/ML", "Real-time Processing", "Web App"],
+                image: speechToTextImage,
                 demoUrl: "",
-                githubUrl: "",
+                githubUrl: "https://github.com/karthikraman30/text_to_speech_response",
                 featured: true
             },
-            {
-                title: "Cloud Infrastructure Manager",
-                description: "Automated deployment and monitoring system for cloud resources. Features infrastructure-as-code, auto-scaling, and comprehensive logging.",
-                tech: ["Node.js", "AWS", "Terraform", "GraphQL"],
-                image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop",
-                demoUrl: "",
-                githubUrl: "",
-                featured: false
-            },
-            {
-                title: "Blockchain Voting System",
-                description: "Secure, transparent voting platform using blockchain technology. Ensures vote integrity, anonymity, and verifiable results.",
-                tech: ["Solidity", "Web3.js", "React", "IPFS"],
-                image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=600&h=400&fit=crop",
-                demoUrl: "",
-                githubUrl: "",
-                featured: false
-            }
+
         ]
     },
 
@@ -202,15 +191,13 @@ export const siteContent = {
             errorMessage: "Oops! Something went wrong. Please try again."
         },
         social: {
-            email: "karthik@example.com",
-            linkedin: "https://linkedin.com",
-            github: "https://github.com",
-            twitter: "https://twitter.com"
+            email: "k.raman.b30@gmail.com",
+            linkedin: "https://www.linkedin.com/in/karthikramanbalamurugan/",
+            github: "https://github.com/karthikraman30",
         },
         footer: {
             copyright: "© 2025 Karthik Raman",
-            builtWith: "Built with React, GSAP & Framer Motion",
-            tagline: "Crafted with ❤️ and lots of ☕"
+            tagline: "Designed and Developed by Karthik Raman"
         }
     },
 
