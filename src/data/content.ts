@@ -3,8 +3,9 @@
 
 import coinciousImage from '@/assets/images/1.png';
 import snippetManagerImage from '@/assets/images/2.png';
-import housePriceImage from '@/assets/images/3.png';
-import speechToTextImage from '@/assets/images/4.png';
+import psycheImage from '@/assets/images/psyche.png';
+import vaaniImage from '@/assets/images/vaani.png';
+import voltbuddyImage from '@/assets/images/voltbuddy.png';
 
 export const siteContent = {
     // Hero Section
@@ -88,28 +89,28 @@ export const siteContent = {
                 title: "Languages & Technologies",
                 iconName: "Code2",
                 iconBg: "from-cyan-400 to-blue-500",
-                items: ["C", "C++", "Python", "JavaScript", "TypeScript", "SQL", "HTML", "CSS"],
+                items: ["C", "C++", "Rust", "Python", "JavaScript", "TypeScript", "SQL", "HTML", "CSS"],
                 description: "Proficient in multiple programming languages with a strong foundation in problem-solving and algorithm design."
             },
             {
                 title: "Developer Tools",
                 iconName: "Wrench",
                 iconBg: "from-purple-500 to-indigo-500",
-                items: ["Git", "VS Code", "Figma", "Google Colab", "Streamlit", "MATLAB"],
+                items: ["Git", "VS Code", "Vite", "Figma", "Google Colab", "Streamlit", "MATLAB"],
                 description: "Skilled in industry-standard development tools and environments for efficient coding and collaboration."
             },
             {
                 title: "Frameworks & Libraries",
                 iconName: "Cpu",
                 iconBg: "from-pink-500 to-rose-500",
-                items: ["React Native", "React.js", "Node.js", "Tailwind CSS", "NumPy", "Pandas", "Scikit-learn"],
+                items: ["React Native", "React.js", "Next.js", "Node.js", "FastAPI", "Tauri", "Tailwind CSS", "shadcn/ui", "TanStack Query", "NumPy", "Pandas", "Scikit-learn"],
                 description: "Experienced with modern frameworks and libraries for building scalable and efficient applications."
             },
             {
                 title: "Cloud & Databases",
                 iconName: "Database",
                 iconBg: "from-amber-400 to-orange-500",
-                items: ["Firebase", "MySQL", "PostgreSQL", "Gen AI"],
+                items: ["Firebase", "Supabase", "MySQL", "PostgreSQL", "Google Gemini", "Gen AI", "Vercel", "Render"],
                 description: "Knowledgeable in database management and cloud services for robust application development."
             },
             {
@@ -135,6 +136,42 @@ export const siteContent = {
         subtitle: "Here are the projects I've worked on",
         items: [
             {
+                title: "Psyche : AI Voice Journal",
+                description: "A voice-first AI journaling app: speak your thoughts in 9 Indian languages and get a written, AI-analyzed reflection — mood, themes, people, and an 'ask your journal' chat grounded in your own entries. Privacy-first, with entries encrypted at rest.",
+                tech: ["Next.js 15", "React 19", "TypeScript", "Tailwind CSS", "shadcn/ui", "Google Gemini", "Firebase", "Google Cloud KMS", "Vercel"],
+                image: psycheImage,
+                demoUrl: "https://journal-roan-theta.vercel.app",
+                githubUrl: "",
+                featured: true
+            },
+            {
+                title: "Vaani : AI Meeting Notes for Indian Languages",
+                description: "A web app that turns audio in 8+ Indian languages (Hindi, Tamil, Telugu…) into structured English meeting notes — overview, key topics, scored events, decisions, action items, and tags — in seconds. Upload or record, then chat with your meeting.",
+                tech: ["React 19", "TypeScript", "Vite", "Tailwind CSS", "Firebase", "FastAPI", "Google Gemini 2.5 Flash", "Render", "TanStack Query"],
+                image: vaaniImage,
+                demoUrl: "https://vaani-4d78f.web.app",
+                githubUrl: "https://github.com/karthikraman30/vaani",
+                featured: true
+            },
+            {
+                title: "Vaani Desktop : Live Meeting Capture for Mac",
+                description: "A downloadable macOS app that captures system + microphone audio straight from Google Meet, Zoom, or Teams and produces the same rich AI summaries — no upload needed. Auto-detects active meetings and records with one click.",
+                tech: ["Tauri", "Rust", "ScreenCaptureKit", "CPAL", "React", "TypeScript", "FastAPI", "Gemini"],
+                image: vaaniImage,
+                demoUrl: "",
+                githubUrl: "https://github.com/karthikraman30/vaani",
+                featured: true
+            },
+            {
+                title: "VoltBuddy : Gamified Battery Health",
+                description: "A gamified battery health companion that turns your charging habits into a virtual pet RPG. Feed it CSV charging logs and watch your pet thrive or suffer based on your behavior — with a heatmap, rank progression, and GenZ/Regular dual-locale UI.",
+                tech: ["HTML", "CSS", "JavaScript", "Tailwind CSS", "Gemini API"],
+                image: voltbuddyImage,
+                demoUrl: "https://karthikraman30.github.io/VoltBuddy/",
+                githubUrl: "https://github.com/karthikraman30/VoltBuddy",
+                featured: true
+            },
+            {
                 title: "Coincious : Smart Expense Tracker",
                 description: "Built a smart expense tracking application that uses Generative AI to automate transaction classification. Built with a robust Python/Flask backend and a responsive React/TypeScript frontend to simplify personal financial management.",
                 tech: ["Python", "Typescript", "CSS", "Javascript", "Supabase", "Gen AI"],
@@ -152,25 +189,6 @@ export const siteContent = {
                 githubUrl: "https://github.com/karthikraman30/code-snippet-manager",
                 featured: true
             },
-            {
-                title: "House Price Prediction Model",
-                description: "A web-based house price prediction system for California that uses XGBoost machine learning to provide accurate price estimates. Features interactive visualizations, feature importance analysis, location-based insights, and detailed prediction breakdowns. Built with Python, Streamlit, and Plotly for a seamless user experience.",
-                tech: ["Python", "Streamlit", "Plotly", "XGBoost", "NumPy", "Pandas", "Seaborn"],
-                image: housePriceImage,
-                demoUrl: "",
-                githubUrl: "https://github.com/karthikraman30/california-house-price-prediction",
-                featured: false
-            },
-            {
-                title: "Speech to Text with AI Response",
-                description: "Built a web app that converts speech to text using Whisper and generates AI responses with Ollama. Implemented real-time audio processing and user-friendly interface.",
-                tech: ["Whisper", "Ollama", "Speech Recognition", "AI/ML", "Real-time Processing", "Web App"],
-                image: speechToTextImage,
-                demoUrl: "",
-                githubUrl: "https://github.com/karthikraman30/text_to_speech_response",
-                featured: true
-            },
-
         ]
     },
 

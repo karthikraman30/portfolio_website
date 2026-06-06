@@ -69,6 +69,7 @@ export function Projects() {
                         key={i}
                         project={project}
                         index={i}
+                        total={items.length}
                         isReversed={i % 2 === 1}
                     />
                 ))}
@@ -80,10 +81,11 @@ export function Projects() {
 interface ProjectCardProps {
     project: Project;
     index: number;
+    total: number;
     isReversed: boolean;
 }
 
-function ProjectCard({ project, index, isReversed }: ProjectCardProps) {
+function ProjectCard({ project, index, total, isReversed }: ProjectCardProps) {
     const cardRef = useRef<HTMLDivElement>(null);
 
     // Parallax effect for the image
@@ -263,7 +265,7 @@ function ProjectCard({ project, index, isReversed }: ProjectCardProps) {
             </div>
 
             {/* Decorative Line */}
-            {index < 3 && (
+            {index < total - 1 && (
                 <motion.div
                     className="absolute -bottom-12 left-1/2 -translate-x-1/2 w-px h-12 bg-gradient-to-b from-[#00FFFF]/30 to-transparent"
                     initial={{ scaleY: 0 }}
