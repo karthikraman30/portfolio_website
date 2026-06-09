@@ -226,3 +226,37 @@
   scrollbar-width: none;
   /* Firefox */
 }
+/* ===== Resume / Resume-maker print styles =====
+   A dedicated `.print-only` copy of the resume is rendered outside the app UI.
+   On screen it's hidden; on print the whole interactive app (`.screen-only`) is
+   removed so the document height equals the resume height — no extra blank pages. */
+@media screen {
+  .print-only {
+    display: none;
+  }
+}
+@media print {
+  .screen-only,
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  .print-only .resume-print-area {
+    width: 210mm !important;
+    min-height: auto !important;
+    margin: 0 auto !important;
+    box-shadow: none !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  html,
+  body {
+    background: #fff !important;
+  }
+  @page {
+    size: A4;
+    margin: 0;
+  }
+}

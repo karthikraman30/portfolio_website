@@ -20,6 +20,9 @@ dist-ssr
 # Firebase
 .firebase/
 
+# Saved copy of another site (reference only — never commit)
+portfolio-secret/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
